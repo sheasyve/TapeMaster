@@ -1,0 +1,31 @@
+{
+  "name": "Vaporwave",
+  "description": "Vaporwave: \n Neon colors and a nostalgic vibe.",
+  "colors": {
+    "sliderFill": "#FF2A6DFF",
+    "sliderOutline": "#05D9E8FF",
+    "sliderThumb": "#01FFF4FF",
+    "sliderTrack": "#14505FFF",
+    "labelText": "#05D9E8FF",
+    "labelShadow": "#FF2A6E2A",
+    "altText": "#000000B3",
+    "bgCenter": "#390B8AFF",
+    "bgEdge": "#000000FF",
+    "buttonColor": "#05D9E8FF",
+    "buttonHoverColor": "#FF2A6DFF",
+    "settingsOverlay": "#000000CC",
+    "presetOverlay": "#000000C7",
+    "scrollbarThumb": "#01FFF4FF"
+  },
+  "font": {
+    "name": "Arial",
+    "height": 15.0,
+    "isBold": true,
+    "isItalic": true
+  },
+  "logoFont": {
+    "name": "Arial",
+    "isBold": true,
+    "isItalic": false
+  }
+}

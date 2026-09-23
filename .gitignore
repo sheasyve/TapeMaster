@@ -1,0 +1,18 @@
+# Build folders
+/build/
+/build-*/
+build/
+
+# VS Code specific files
+.vscode/
+
+# Visual Studio / MSVC specific files
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# OS specific files
+.DS_Store
+Thumbs.db

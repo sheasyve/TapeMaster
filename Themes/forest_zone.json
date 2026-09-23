@@ -1,0 +1,31 @@
+{
+  "name": "Forest Zone",
+  "description": "Forest Zone: \n A lush green theme inspired by the woods.",
+  "colors": {
+    "sliderFill": "#4CAF50FF",
+    "sliderOutline": "#388E3CFF",
+    "sliderThumb": "#FFF8E7FF",
+    "sliderTrack": "#1B3B28FF",
+    "labelText": "#F1F8E9FF",
+    "labelShadow": "#00000040",
+    "altText": "#1E2714",
+    "bgCenter": "#1B3B28FF",
+    "bgEdge": "#0A140EFF",
+    "buttonColor": "#8D6E63FF",
+    "buttonHoverColor": "#A1887FFF",
+    "settingsOverlay": "#0A140EF2",
+    "presetOverlay": "#0A140ECC",
+    "scrollbarThumb": "#81C784FF"
+  },
+  "font": {
+    "name": "Georgia",
+    "height": 16.0,
+    "isBold": false,
+    "isItalic": false
+  },
+  "logoFont": {
+    "name": "Georgia",
+    "isBold": true,
+    "isItalic": false
+  }
+}

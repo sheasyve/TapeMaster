@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Parameters>
+  <PARAM id="BITS" value="4.840000152587891"/>
+  <PARAM id="HPF" value="0.0"/>
+  <PARAM id="LPF"/>
+  <PARAM id="MIX" value="0.8380000591278076"/>
+  <PARAM id="RATE" value="4.470000267028809"/>
+  <PARAM id="THEME_ID"/>
+</Parameters>
