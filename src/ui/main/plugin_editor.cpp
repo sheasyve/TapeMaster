@@ -36,7 +36,7 @@ MyPluginEditor::MyPluginEditor(MyPluginProcessor &p)
     updateTheme(initialTheme);
 
     setResizable(true, true);
-    setResizeLimits(340, 340, 599, 599);
+    setResizeLimits(520, 520, 700, 700);
     getConstrainer()->setFixedAspectRatio(1.0);
     auto savedSize = audioProcessor.getWindowSize();
     setSize(savedSize.x, savedSize.y);
