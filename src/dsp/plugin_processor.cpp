@@ -35,13 +35,18 @@ bool MyPluginProcessor::isBusesLayoutSupported(const BusesLayout &layouts) const
 // --- DSP ---
 
 void MyPluginProcessor::prepareToPlay(double sampleRate, int samplesPerBlock) {
-    auto numChannels = getTotalNumInputChannels();
-    heldSamples.assign(numChannels, 0.0f);
-    sampleCounters.assign(numChannels, 0);
     for (int i = 0; i < 2; ++i) {
         highPassFilters[i].reset();
         lowPassFilters[i].reset();
     }
+    int maxDelayInSamples = static_cast<int>(sampleRate * 1.0); 
+    int numChannels = getTotalNumInputChannels();
+    
+    delayBuffer.setSize(numChannels, maxDelayInSamples);
+    delayBuffer.clear();
+    writeIndices.assign(numChannels, 0);
+    globalWowPhase = 0.0f;
+    globalFlutterPhase = 0.0f;
 }
 
 void MyPluginProcessor::releaseResources() {}

@@ -1,31 +1,48 @@
 #pragma once
 #include <JuceHeader.h>
-#include "../../dsp/knob_processing.h"
-#include "ui/style/knob_look.h"
-#include "ui/style/tooltips.h"
+// #include "look_and_feel.h" // Ensure your KnobLookAndFeel is accessible here
 
 class PluginControls : public juce::Component {
 public:
     PluginControls(juce::AudioProcessorValueTreeState &apvts);
-    ~PluginControls();
+    ~PluginControls() override;
+    // --- Labels ---
+    juce::Label wowDepthLabel;
+    juce::Label wowRateLabel;
+    juce::Label flutterDepthLabel;
+    juce::Label flutterRateLabel;
+    juce::Label driveLabel;
+    juce::Label hpLabel;
+    juce::Label lpLabel;
+    juce::Label mixLabel;
+
+    // --- Sliders ---
+    juce::Slider wowDepthSlider;
+    juce::Slider wowRateSlider;
+    juce::Slider flutterDepthSlider;
+    juce::Slider flutterRateSlider;
+    juce::Slider driveSlider;
+    juce::Slider hpSlider;
+    juce::Slider lpSlider;
+    juce::Slider mixSlider;
+
+    juce::Rectangle<int> logoBounds;
 
     void resized() override;
-    juce::Rectangle<int> logoBounds;
-    Knobs::CustomKnob hpSlider;
-    Knobs::CustomKnob lpSlider;
-    Knobs::CustomKnob bitSlider;
-    Knobs::CustomKnob rateSlider;
-    Knobs::CustomKnob mixSlider;
-    juce::Label hpLabel, lpLabel, bitLabel, rateLabel, mixLabel;
+    void lookAndFeelChanged() override;
 
 private:
-    KnobLookAndFeel KnobLookAndFeel;
-    void lookAndFeelChanged() override;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> hpAttachment;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> lpAttachment;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> bitAttachment;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> rateAttachment;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mixAttachment;
+    // --- Attachments ---
+    using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
+
+    std::unique_ptr<SliderAttachment> wowDepthAttachment;
+    std::unique_ptr<SliderAttachment> wowRateAttachment;
+    std::unique_ptr<SliderAttachment> flutterDepthAttachment;
+    std::unique_ptr<SliderAttachment> flutterRateAttachment;
+    std::unique_ptr<SliderAttachment> driveAttachment;
+    std::unique_ptr<SliderAttachment> hpAttachment;
+    std::unique_ptr<SliderAttachment> lpAttachment;
+    std::unique_ptr<SliderAttachment> mixAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginControls)
 };

@@ -103,17 +103,20 @@ void MyPluginEditor::paintOverChildren(juce::Graphics &g) {
             textBounds = pluginControls.logoBounds.translated((int)(getWidth() * 0.02f), -standardOffset);
         }
         g.setColour(themeProps.labelShadow);
-        g.drawText("SimpleCrush", textBounds.translated(2, 2), juce::Justification::centred);
+        g.drawText("TapeMaster", textBounds.translated(2, 2), juce::Justification::centred);
         g.setColour(themeProps.labelText);
-        g.drawText("SimpleCrush", textBounds, juce::Justification::centred);
+        g.drawText("TapeMaster", textBounds, juce::Justification::centred);
     }
 }
 
 void MyPluginEditor::setLabelsVisible(bool shouldBeVisible) {
+    pluginControls.wowDepthLabel.setVisible(shouldBeVisible);
+    pluginControls.wowRateLabel.setVisible(shouldBeVisible);
+    pluginControls.flutterDepthLabel.setVisible(shouldBeVisible);
+    pluginControls.flutterRateLabel.setVisible(shouldBeVisible);
+    pluginControls.driveLabel.setVisible(shouldBeVisible);
     pluginControls.hpLabel.setVisible(shouldBeVisible);
     pluginControls.lpLabel.setVisible(shouldBeVisible);
-    pluginControls.bitLabel.setVisible(shouldBeVisible);
-    pluginControls.rateLabel.setVisible(shouldBeVisible);
     pluginControls.mixLabel.setVisible(shouldBeVisible);
 }
 

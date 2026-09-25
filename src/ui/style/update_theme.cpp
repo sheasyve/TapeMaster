@@ -44,23 +44,29 @@ void MyPluginEditor::updateTheme(int themeId) {
 
     auto applyLabelTheme = [&](juce::Label &label) { label.setColour(juce::Label::textColourId, theme.labelText); };
 
-    // Rotary Sliders
+    // --- Rotary Sliders (Updated for TapeMaster) ---
+    applyRotaryTheme(pluginControls.wowDepthSlider);
+    applyRotaryTheme(pluginControls.wowRateSlider);
+    applyRotaryTheme(pluginControls.flutterDepthSlider);
+    applyRotaryTheme(pluginControls.flutterRateSlider);
+    applyRotaryTheme(pluginControls.driveSlider);
     applyRotaryTheme(pluginControls.hpSlider);
     applyRotaryTheme(pluginControls.lpSlider);
-    applyRotaryTheme(pluginControls.bitSlider);
-    applyRotaryTheme(pluginControls.rateSlider);
 
-    // Mix Slider
+    // --- Mix Slider ---
     pluginControls.mixSlider.setColour(juce::Slider::trackColourId, theme.sliderFill);
     pluginControls.mixSlider.setColour(juce::Slider::backgroundColourId, theme.sliderTrack);
     pluginControls.mixSlider.setColour(juce::Slider::thumbColourId, theme.sliderThumb);
     pluginControls.mixSlider.setColour(juce::Slider::textBoxTextColourId, theme.labelText);
 
-    // Main UI Labels
+    // --- Main UI Labels (Updated for TapeMaster) ---
+    applyLabelTheme(pluginControls.wowDepthLabel);
+    applyLabelTheme(pluginControls.wowRateLabel);
+    applyLabelTheme(pluginControls.flutterDepthLabel);
+    applyLabelTheme(pluginControls.flutterRateLabel);
+    applyLabelTheme(pluginControls.driveLabel);
     applyLabelTheme(pluginControls.hpLabel);
     applyLabelTheme(pluginControls.lpLabel);
-    applyLabelTheme(pluginControls.bitLabel);
-    applyLabelTheme(pluginControls.rateLabel);
     applyLabelTheme(pluginControls.mixLabel);
 
     // Overlay Labels

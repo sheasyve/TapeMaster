@@ -13,7 +13,11 @@ public:
     bool isBusesLayoutSupported(const BusesLayout &layouts) const override;
     void processBlock(juce::AudioBuffer<float> &, juce::MidiBuffer &) override;
     void setFilters(juce::AudioBuffer<float> &, juce::MidiBuffer &, float mix, float sampleRate, int channelsToProcess);
-    void process(juce::AudioBuffer<float> &buffer, juce::MidiBuffer &midiMessages, int channel, int channelsToProcess, int rate, float totalLevels, float mix);
+    
+    // Updated process signature for tape emulation
+    void process(juce::AudioBuffer<float> &buffer, int channel, int channelsToProcess, 
+                 float wowDepth, float wowRate, float flutterDepth, float flutterRate, 
+                 float driveLinear, float mix, float sampleRate);
 
     // --- GUI Bridging ---
     juce::AudioProcessorEditor *createEditor() override;
@@ -50,9 +54,16 @@ public:
 private:
     juce::ApplicationProperties appProperties;
     void initPropertiesFile();
-    std::vector<float> heldSamples;
-    std::vector<int> sampleCounters;
+
+    // --- Tape Delay & LFO Variables ---
+    juce::AudioBuffer<float> delayBuffer;
+    std::vector<int> writeIndices;
+    float globalWowPhase = 0.0f;
+    float globalFlutterPhase = 0.0f;
+
+    // --- Filters ---
     juce::IIRFilter highPassFilters[2];
     juce::IIRFilter lowPassFilters[2];
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MyPluginProcessor)
 };

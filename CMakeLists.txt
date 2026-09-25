@@ -1,10 +1,10 @@
-#C:\Users\sheam\Documents\redux-plugin\SimpleCrush
+#C:\Users\sheam\Documents\redux-plugin\TapeMaster
 cmake_minimum_required(VERSION 3.25)
 
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build" FORCE)
 
-project(SimpleCrush VERSION 1.3.1)
+project(TapeMaster VERSION 1.3.1)
 add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/std:c++latest>")
 
 cmake_policy(SET CMP0177 NEW)
@@ -18,23 +18,23 @@ else()
     set(VST3_DIR "")
 endif()
 
-juce_add_plugin(SimpleCrush
+juce_add_plugin(TapeMaster
     COMPANY_NAME "Syverson Audio"
-    BUNDLE_ID "com.SyversonAudio.SimpleCrush"
+    BUNDLE_ID "com.SyversonAudio.TapeMaster"
     IS_SYNTH FALSE
     NEEDS_MIDI_INPUT FALSE
     NEEDS_MIDI_OUTPUT FALSE
     PLUGIN_MANUFACTURER_CODE "SyAu" 
     PLUGIN_CODE "Rdx4"
     FORMATS VST3 AU Standalone
-    PRODUCT_NAME "SimpleCrush"
+    PRODUCT_NAME "TapeMaster"
     COPY_PLUGIN_AFTER_BUILD ${DO_COPY}
     VST3_COPY_DIR "${VST3_DIR}" 
 )
 
-juce_generate_juce_header(SimpleCrush)
+juce_generate_juce_header(TapeMaster)
 
-target_sources(SimpleCrush PRIVATE
+target_sources(TapeMaster PRIVATE
     src/dsp/plugin_processor.cpp
     src/dsp/plugin_processor.h
     src/dsp/audio_processing.cpp
@@ -59,9 +59,9 @@ target_sources(SimpleCrush PRIVATE
     src/ui/components/preset_actions.cpp
 )
 
-target_link_libraries(SimpleCrush PRIVATE
+target_link_libraries(TapeMaster PRIVATE
     juce::juce_audio_utils
     juce::juce_dsp)
     
-target_include_directories(SimpleCrush PRIVATE src)
-target_compile_definitions(SimpleCrush PUBLIC JUCE_VST3_CAN_REPLACE_VST2=0)
+target_include_directories(TapeMaster PRIVATE src)
+target_compile_definitions(TapeMaster PUBLIC JUCE_VST3_CAN_REPLACE_VST2=0)

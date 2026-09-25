@@ -38,81 +38,103 @@ juce::NormalisableRange<float> makeCustomSkewRange(float start, float end, float
     return juce::NormalisableRange<float>(start, end, 0.0f, skewFactor);
 }
 
-juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout() { // Define the knob functionality and parameters.
+juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
+{
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
 
-    // HPF - Custom Range
+    // 1. Wow Depth (Slow Warble Amount)
+    layout.add(std::make_unique<juce::AudioParameterFloat>(
+        juce::ParameterID{"WOW_DEPTH", 1},
+        "Wow Depth",
+        juce::NormalisableRange<float>(0.0f, 100.0f, 0.1f),
+        15.0f,
+        juce::AudioParameterFloatAttributes().withLabel("%")
+    ));
+
+    // 2. Wow Rate (Slow Warble Speed)
+    layout.add(std::make_unique<juce::AudioParameterFloat>(
+        juce::ParameterID{"WOW_RATE", 1},
+        "Wow Rate",
+        juce::NormalisableRange<float>(0.1f, 5.0f, 0.01f, 0.5f),
+        1.2f,
+        juce::AudioParameterFloatAttributes().withLabel("Hz")
+    ));
+
+    // 3. Flutter Depth (Rapid Shudder Amount)
+    layout.add(std::make_unique<juce::AudioParameterFloat>(
+        juce::ParameterID{"FLUTTER_DEPTH", 1},
+        "Flutter Depth",
+        juce::NormalisableRange<float>(0.0f, 100.0f, 0.1f),
+        10.0f,
+        juce::AudioParameterFloatAttributes().withLabel("%")
+    ));
+
+    // 4. Flutter Rate (Mechanical Frequency / Sprocket Rate)
+    layout.add(std::make_unique<juce::AudioParameterFloat>(
+        juce::ParameterID{"FLUTTER_RATE", 1},
+        "Flutter Rate",
+        juce::NormalisableRange<float>(5.0f, 50.0f, 0.1f),
+        24.0f, // 24 Hz default for standard film transport rate
+        juce::AudioParameterFloatAttributes().withLabel("Hz")
+    ));
+
+    // 5. Tape Drive (Warm Saturation)
+    layout.add(std::make_unique<juce::AudioParameterFloat>(
+        juce::ParameterID{"TAPE_DRIVE", 1},
+        "Drive",
+        juce::NormalisableRange<float>(0.0f, 24.0f, 0.1f),
+        0.0f,
+        juce::AudioParameterFloatAttributes().withLabel("dB")
+    ));
+
+    // 6. High Pass Filter (Sub-Rumble Cut)
     layout.add(std::make_unique<juce::AudioParameterFloat>(
         juce::ParameterID{"HPF", 1},
         "High Pass",
-        makeCustomSkewRange(0.0f, 20000.0f, 0.3f),
-        0.0f,
+        juce::NormalisableRange<float>(20.0f, 1000.0f, 1.0f, 0.3f),
+        20.0f,
         juce::AudioParameterFloatAttributes()
+            .withLabel("Hz")
             .withStringFromValueFunction([](float value, int) {
+                if (value <= 20.05f) return juce::String("Off");
                 return juce::String(juce::roundToInt(value)) + " Hz";
             })
-            .withValueFromStringFunction([](const juce::String &text) { 
-                return text.removeCharacters(" Hz").getFloatValue(); 
-            })));
-
-    // BITS - Continuous interval 
-    layout.add(std::make_unique<juce::AudioParameterFloat>(
-        juce::ParameterID{"BITS", 1},
-        "Bit Depth",
-        juce::NormalisableRange<float>(1.0f, 16.0f, 0.0f),
-        16.0f,
-        juce::AudioParameterFloatAttributes()
-            .withStringFromValueFunction([](float value, int) {
-                juce::String text = juce::String(value, 1);
-                return text.length() > 6 ? text.substring(0, 6) : text;
+            .withValueFromStringFunction([](const juce::String& text) {
+                if (text.equalsIgnoreCase("Off")) return 20.0f;
+                return text.upToFirstOccurrenceOf(" ", false, false).getFloatValue();
             })
-            .withValueFromStringFunction([](const juce::String &text) { return text.getFloatValue(); })));
+    ));
 
-    // RATE - Custom Range
-    layout.add(std::make_unique<juce::AudioParameterFloat>(
-        juce::ParameterID{"RATE", 1},
-        "Sample Rate",
-        makeCustomSkewRange(1.0f, 44.1f, 0.6f),
-        44.1f,
-        juce::AudioParameterFloatAttributes()
-            .withStringFromValueFunction([](float value, int) {
-                if (std::abs(value) < 0.001f) value = 0.0f;
-                juce::String text = juce::String(value, 2);
-                return text.length() > 6 ? text.substring(0, 6) : text;
-            })
-            .withValueFromStringFunction([](const juce::String &text) { return text.getFloatValue(); })));
-
-    // LPF - Custom Range
+    // 7. Low Pass Filter (Tape Head High-End Roll-off)
     layout.add(std::make_unique<juce::AudioParameterFloat>(
         juce::ParameterID{"LPF", 1},
         "Low Pass",
-        makeCustomSkewRange(20.0f, 20000.0f, 0.3f),
+        juce::NormalisableRange<float>(1000.0f, 20000.0f, 1.0f, 0.25f),
         20000.0f,
         juce::AudioParameterFloatAttributes()
+            .withLabel("Hz")
             .withStringFromValueFunction([](float value, int) {
-                // Round to int to strip decimals, then append Hz
+                if (value >= 1000.0f)
+                    return juce::String(value / 1000.0f, 1) + " kHz";
                 return juce::String(juce::roundToInt(value)) + " Hz";
             })
-            .withValueFromStringFunction([](const juce::String &text) { 
-                return text.removeCharacters(" Hz").getFloatValue(); 
-            })));
+            .withValueFromStringFunction([](const juce::String& text) {
+                juce::String clean = text.trim();
+                if (clean.endsWithIgnoreCase("k") || clean.endsWithIgnoreCase("khz"))
+                    return clean.upToFirstOccurrenceOf("k", false, true).getFloatValue() * 1000.0f;
+                return clean.upToFirstOccurrenceOf(" ", false, false).getFloatValue();
+            })
+    ));
 
-    // MIX - Continuous interval (0.0f)
+    // 8. Dry / Wet Mix
     layout.add(std::make_unique<juce::AudioParameterFloat>(
         juce::ParameterID{"MIX", 1},
         "Mix",
-        juce::NormalisableRange<float>(0.0f, 1.0f, 0.0f),
-        1.0f,
-        juce::AudioParameterFloatAttributes()
-            .withStringFromValueFunction([](float value, int) {
-                float mixed = value * 100.0f;
-                if (std::abs(mixed) < 0.01f) mixed = 0.0f;
-                juce::String text = juce::String(mixed, 1) + "%";
-                return text.length() > 6 ? text.substring(0, 6) : text;
-            })
-            .withValueFromStringFunction([](const juce::String &text) { return text.getFloatValue() / 100.0f; })));
-            
-    layout.add(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"THEME_ID", 1}, "Theme ID", 1, 8, 1));
+        juce::NormalisableRange<float>(0.0f, 100.0f, 0.5f),
+        100.0f,
+        juce::AudioParameterFloatAttributes().withLabel("%")
+    ));
+
     return layout;
 }
 
