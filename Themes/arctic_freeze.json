@@ -1,0 +1,31 @@
+{
+  "name": "Arctic Freeze",
+  "description": "Arctic Freeze: \n A sultry ice theme with shades of blue and white.",
+  "colors": {
+    "sliderFill": "#30C5FFFF",
+    "sliderOutline": "#0096C7FF",
+    "sliderThumb": "#FFFFFFFF",
+    "sliderTrack": "#0A2440FF",
+    "labelText": "#ADE8F4FF",
+    "labelShadow": "#0A24405B",
+    "altText": "#052B33",
+    "bgCenter": "#0A2440FF",
+    "bgEdge": "#031020FF",
+    "buttonColor": "#0096C7FF",
+    "buttonHoverColor": "#30C5FFFF",
+    "settingsOverlay": "#031020F2",
+    "presetOverlay": "#031020CC",
+    "scrollbarThumb": "#FFFFFFFF"
+  },
+  "font": {
+    "name": "Trebuchet MS",
+    "height": 16.0,
+    "isBold": true,
+    "isItalic": false
+  },
+  "logoFont": {
+    "name": "Montserrat",
+    "isBold": true,
+    "isItalic": false
+  }
+}

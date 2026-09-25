@@ -1,0 +1,31 @@
+{
+  "name": "Retro Brown",
+  "description": "Retro Brown: \n A warm, nostalgic theme with caramel and brown tones.",
+  "colors": {
+    "sliderFill": "#BD9C78",
+    "sliderOutline": "#9A623BFF",
+    "sliderThumb": "#DFB382FF",
+    "sliderTrack": "#574439",
+    "labelText": "#F0E3CBFF",
+    "labelShadow": "#DFB48238",
+    "altText": "#443226B3",
+    "bgCenter": "#9C7866D3",
+    "bgEdge": "#42342D",
+    "buttonColor": "#DFB382FF",
+    "buttonHoverColor": "#CFC8C2",
+    "settingsOverlay": "#5C4032E6",
+    "presetOverlay": "#5C4032E6",
+    "scrollbarThumb": "#DFB382FF"
+  },
+  "font": {
+    "name": "Helvetica",
+    "height": 15.0,
+    "isBold": true,
+    "isItalic": true
+  },
+  "logoFont": {
+    "name": "Cooper Black",
+    "isBold": true,
+    "isItalic": false
+  }
+}

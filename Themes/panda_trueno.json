@@ -1,0 +1,31 @@
+{
+  "name": "Panda Trueno",
+  "description": "Panda Trueno: \n A sleek dark theme with red accents, inspired by the iconic Toyota AE86.",
+  "colors": {
+    "sliderFill": "#FFFFFFFF",
+    "sliderOutline": "#1A1A1AFF",
+    "sliderThumb": "#E50000FF",
+    "sliderTrack": "#333333FF",
+    "labelText": "#FFFFFFFF",
+    "labelShadow": "#2B2B2B7E",
+    "altText": "#000000",
+    "bgCenter": "#2B2B2BFF",
+    "bgEdge": "#050505FF",
+    "buttonColor": "#FFFFFFBD",
+    "buttonHoverColor": "#E50000FF",
+    "settingsOverlay": "#000000E6",
+    "presetOverlay": "#000000CC",
+    "scrollbarThumb": "#E50000FF"
+  },
+  "font": {
+    "name": "Arial",
+    "height": 15.0,
+    "isBold": true,
+    "isItalic": true
+  },
+  "logoFont": {
+    "name": "Arial",
+    "isBold": true,
+    "isItalic": false
+  }
+}

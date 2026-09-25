@@ -1,0 +1,31 @@
+{
+  "name": "Studio Light",
+  "description": "Studio Light: \n A classic light theme.",
+  "colors": {
+    "sliderFill": "#333333FF",
+    "sliderOutline": "#AAAAAAFF",
+    "sliderThumb": "#333333FF",
+    "sliderTrack": "#BBBBBBFF",
+    "labelText": "#222222FF",
+    "labelShadow": "#F9F9F983",
+    "altText": "#FAFAFA",
+    "bgCenter": "#F9F9F9FF",
+    "bgEdge": "#DCDCDCFF",
+    "buttonColor": "#080808FF",
+    "buttonHoverColor": "#8D8D8DFF",
+    "settingsOverlay": "#E0E0E0D4",
+    "presetOverlay": "#E0E0E0D4",
+    "scrollbarThumb": "#333333FF"
+  },
+  "font": {
+    "name": "Arial",
+    "height": 15.0,
+    "isBold": true,
+    "isItalic": false
+  },
+  "logoFont": {
+    "name": "Arial",
+    "isBold": true,
+    "isItalic": false
+  }
+}
